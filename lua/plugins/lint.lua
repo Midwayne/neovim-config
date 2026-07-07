@@ -5,8 +5,8 @@ return {
         config = function()
             local lint = require 'lint'
             lint.linters_by_ft = {
-                c = { 'cppcheck' },
-                cpp = { 'cppcheck' },
+                c = { 'cpplint' },
+                cpp = { 'cpplint' },
                 go = { 'golangcilint' },
                 javascript = { 'eslint_d' },
                 kotlin = { 'ktlint' },
