@@ -11,7 +11,7 @@ return {
                 function()
                     require('oil').toggle_float()
                 end,
-                desc = 'Toggle Oil file browser',
+                desc = '[O]il file browser',
             },
         },
     },

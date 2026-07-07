@@ -67,8 +67,17 @@ return {
 
             -- See `:help telescope.builtin`
             local builtin = require 'telescope.builtin'
+            local keymap_modes = { 'n', 'i', 'x', 'v', 't', 's', 'o', 'c' }
+
+            local function search_keymaps()
+                builtin.keymaps {
+                    modes = keymap_modes,
+                    show_plug = true,
+                }
+            end
+
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
-            vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+            vim.keymap.set('n', '<leader>sk', search_keymaps, { desc = '[S]earch [K]eymaps' })
             vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })

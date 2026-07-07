@@ -37,15 +37,15 @@ return {
                     F12 = '<F12>',
                 },
             },
-
-            spec = {
-                { '<leader>s', group = '[S]earch' },
-                { '<leader>t', group = '[T]oggle' },
-                { '<leader>tt', desc = '[T]oggle [T]erminal' },
-                { '<leader>h', group = '[H]arpoon / Git' },
-                { '<leader>g', group = '[G]it' },
-                { '<leader>o', group = '[O]pencode' },
-            },
+            spec = require 'which-key-spec',
         },
+        config = function(_, opts)
+            local wk = require 'which-key'
+            wk.setup(opts)
+
+            vim.keymap.set('n', '<leader>?', function()
+                wk.show { keys = '<leader>', loop = true }
+            end, { desc = '[?] Show keymap help' })
+        end,
     },
 }
