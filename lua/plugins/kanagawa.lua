@@ -5,7 +5,7 @@ return {
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       require('kanagawa').setup {
-        compile = false, -- enable compiling the colorscheme
+        compile = false, -- set true to compile the colorscheme for faster startup
         undercurl = true, -- enable undercurls
         commentStyle = { italic = false },
         functionStyle = {},
