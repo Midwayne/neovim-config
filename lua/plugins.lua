@@ -4,6 +4,7 @@ require('lazy').setup({
   require 'plugins.diffview',
   require 'plugins.which-key',
   require 'plugins.telescope',
+  require 'plugins.fff',
   require 'plugins.harpoon',
   require 'plugins.oil',
   require 'plugins.opencode',
