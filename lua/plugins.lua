@@ -21,7 +21,6 @@ require('lazy').setup({
   -- require 'plugins.lint',
   require 'plugins.autopairs',
   require 'plugins.toggleterm',
-  require 'plugins.neo-tree',
   -- require 'plugins.smart-splits',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
