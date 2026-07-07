@@ -47,16 +47,16 @@ return {
                 :find()
         end
 
-        vim.keymap.set('n', '<leader>He', function()
+        vim.keymap.set('n', '<leader>he', function()
             toggle_telescope(harpoon:list())
-        end, { desc = 'Harpoon open window' })
+        end, { desc = 'Open Harpoon window (Telescope)' })
 
-        vim.keymap.set('n', '<leader>Ha', function()
+        vim.keymap.set('n', '<leader>ha', function()
             harpoon:list():add()
-        end, { desc = 'Harpoon [A]dd file' })
+        end, { desc = 'Harpoon add file' })
 
         for i = 1, 4 do
-            vim.keymap.set('n', '<leader>H' .. i, function()
+            vim.keymap.set('n', '<leader>h' .. i, function()
                 harpoon:list():select(i)
             end, { desc = 'Harpoon select ' .. i })
         end
