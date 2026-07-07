@@ -227,6 +227,9 @@ return {
             --
             -- You can add other tools here that you want Mason to install
             -- for you, so that they are available from within Neovim.
+            --
+            -- rustfmt is not in the Mason registry; install it via rustup:
+            --   rustup component add rustfmt
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
                 'clang-format',
@@ -240,7 +243,6 @@ return {
                 'prettier',
                 'prettierd',
                 'ruff',
-                'rustfmt',
                 'stylua',
             })
             require('mason-tool-installer').setup { ensure_installed = ensure_installed }
