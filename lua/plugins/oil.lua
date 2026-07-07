@@ -1,19 +1,18 @@
 return {
-  {
-    'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
-    dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
-    lazy = false,
-    keys = {
-      {
-        '\\',
-        function()
-          require('oil').toggle_float()
-        end,
-        desc = 'Toggle Oil file browser',
-      },
+    {
+        'stevearc/oil.nvim',
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        opts = {},
+        dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
+        keys = {
+            {
+                '\\',
+                function()
+                    require('oil').toggle_float()
+                end,
+                desc = '[O]il file browser',
+            },
+        },
     },
-  },
 }
