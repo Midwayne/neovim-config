@@ -16,6 +16,7 @@ require('lazy').setup({
     require 'plugins.todo-comments',
     require 'plugins.mini',
     require 'plugins.treesitter',
+    require 'plugins.render-markdown',
     -- require 'plugins.debug',
     require 'plugins.indent_line',
     require 'plugins.lint',

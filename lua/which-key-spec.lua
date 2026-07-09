@@ -26,6 +26,10 @@ return {
     { '<leader>o', group = '[O]pencode' },
     { '<leader>t', group = '[T]oggle' },
     { '<leader>tt', desc = '[T]oggle [T]erminal' },
+    { '<leader>tm', desc = '[T]oggle [M]arkdown render' },
+
+    { '<leader>m', group = '[M]arkdown' },
+    { '<leader>mp', desc = '[M]arkdown [P]review' },
 
     { '<leader>gd', desc = '[G]it [D]iffview open' },
     { '<leader>gD', desc = '[G]it [D]iffview close' },
