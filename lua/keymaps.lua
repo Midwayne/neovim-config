@@ -17,20 +17,36 @@ end, { desc = 'Open link under cursor' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent selection left' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Indent selection right' })
 
-local function edit_selected_lines(action)
+local function get_line_range()
+    local mode = vim.fn.mode()
+    if mode == 'v' or mode == 'V' or mode == '\22' then
+        -- While still in visual mode, '< / '> are the *previous* selection.
+        local start_line = vim.fn.line 'v'
+        local end_line = vim.fn.line '.'
+        -- Leave visual mode so the input prompt can take focus cleanly.
+        local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
+        vim.api.nvim_feedkeys(esc, 'nx', false)
+        return start_line, end_line
+    end
+
     local start_line = vim.fn.getpos("'<")[2]
     local end_line = vim.fn.getpos("'>")[2]
     if start_line <= 0 or end_line <= 0 then
-        start_line = vim.fn.line '.'
-        end_line = start_line
+        local line = vim.fn.line '.'
+        return line, line
     end
+    return start_line, end_line
+end
+
+local function edit_selected_lines(action)
+    local start_line, end_line = get_line_range()
     action(start_line, end_line)
 end
 
-vim.keymap.set('n', '<leader>lp', function()
+vim.keymap.set({ 'n', 'x' }, '<leader>lp', function()
     edit_selected_lines(require('multiline').prefix_lines)
 end, { desc = '[L]ine [P]refix' })
-vim.keymap.set('n', '<leader>ls', function()
+vim.keymap.set({ 'n', 'x' }, '<leader>ls', function()
     edit_selected_lines(require('multiline').postfix_lines)
 end, { desc = '[L]ine [S]uffix' })
 

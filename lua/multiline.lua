@@ -31,8 +31,14 @@ end
 local function edit_lines(start_line, end_line, prompt, transform)
     start_line, end_line = normalize_range(start_line, end_line)
 
-    vim.ui.input({ prompt = prompt }, function(text)
-        if text == nil or text == '' then
+    -- Defer past which-key / visual-mode teardown so the cmdline prompt can accept keys.
+    vim.schedule(function()
+        local canceled = vim.NIL
+        local ok, text = pcall(vim.fn.input, {
+            prompt = prompt,
+            cancelreturn = canceled,
+        })
+        if not ok or text == nil or text == canceled or text == '' then
             return
         end
 
