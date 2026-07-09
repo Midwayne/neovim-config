@@ -31,8 +31,14 @@ end
 local function edit_lines(start_line, end_line, prompt, transform)
     start_line, end_line = normalize_range(start_line, end_line)
 
-    vim.ui.input({ prompt = prompt }, function(text)
-        if text == nil or text == '' then
+    -- Defer past which-key / visual-mode teardown so the cmdline prompt can accept keys.
+    vim.schedule(function()
+        local canceled = vim.NIL
+        local ok, text = pcall(vim.fn.input, {
+            prompt = prompt,
+            cancelreturn = canceled,
+        })
+        if not ok or text == nil or text == canceled or text == '' then
             return
         end
 
@@ -55,6 +61,26 @@ function M.postfix_lines(start_line, end_line)
     edit_lines(start_line, end_line, 'Postfix lines with: ', function(line, text)
         local content, trailing = line:match '^(.-)(%s*)$'
         return content .. text .. trailing
+    end)
+end
+
+function M.remove_prefix_lines(start_line, end_line)
+    edit_lines(start_line, end_line, 'Remove prefix: ', function(line, text)
+        local indent, content = line:match '^(%s*)(.*)$'
+        if vim.startswith(content, text) then
+            return indent .. content:sub(#text + 1)
+        end
+        return line
+    end)
+end
+
+function M.remove_postfix_lines(start_line, end_line)
+    edit_lines(start_line, end_line, 'Remove suffix: ', function(line, text)
+        local content, trailing = line:match '^(.-)(%s*)$'
+        if vim.endswith(content, text) then
+            return content:sub(1, #content - #text) .. trailing
+        end
+        return line
     end)
 end
 
