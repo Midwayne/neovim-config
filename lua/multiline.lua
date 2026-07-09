@@ -1,18 +1,16 @@
 local M = {}
 
-local function get_line_range()
-    local start_line = vim.fn.line "'<"
-    local end_line = vim.fn.line "'>"
-
-    if start_line > 0 and end_line > 0 then
-        if start_line > end_line then
-            start_line, end_line = end_line, start_line
-        end
-        return start_line, end_line
+local function normalize_range(start_line, end_line)
+    if start_line == nil or end_line == nil or start_line <= 0 or end_line <= 0 then
+        local line = vim.fn.line '.'
+        return line, line
     end
 
-    local line = vim.fn.line '.'
-    return line, line
+    if start_line > end_line then
+        start_line, end_line = end_line, start_line
+    end
+
+    return start_line, end_line
 end
 
 local function restore_visual_selection(start_line, end_line)
@@ -23,44 +21,40 @@ local function restore_visual_selection(start_line, end_line)
 end
 
 local function update_lines(start_line, end_line, transform)
-    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    local lines = vim.fn.getline(start_line, end_line)
     for index, line in ipairs(lines) do
         lines[index] = transform(line)
     end
-    vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, lines)
+    vim.fn.setline(start_line, lines)
 end
 
-function M.prefix_lines()
-    local start_line, end_line = get_line_range()
+local function edit_lines(start_line, end_line, prompt, transform)
+    start_line, end_line = normalize_range(start_line, end_line)
 
-    vim.ui.input({ prompt = 'Prefix lines with: ' }, function(text)
+    vim.ui.input({ prompt = prompt }, function(text)
         if text == nil or text == '' then
             return
         end
 
         update_lines(start_line, end_line, function(line)
-            local indent, content = line:match '^(%s*)(.*)$'
-            return indent .. text .. content
+            return transform(line, text)
         end)
 
         restore_visual_selection(start_line, end_line)
     end)
 end
 
-function M.postfix_lines()
-    local start_line, end_line = get_line_range()
+function M.prefix_lines(start_line, end_line)
+    edit_lines(start_line, end_line, 'Prefix lines with: ', function(line, text)
+        local indent, content = line:match '^(%s*)(.*)$'
+        return indent .. text .. content
+    end)
+end
 
-    vim.ui.input({ prompt = 'Postfix lines with: ' }, function(text)
-        if text == nil or text == '' then
-            return
-        end
-
-        update_lines(start_line, end_line, function(line)
-            local content, trailing = line:match '^(.-)(%s*)$'
-            return content .. text .. trailing
-        end)
-
-        restore_visual_selection(start_line, end_line)
+function M.postfix_lines(start_line, end_line)
+    edit_lines(start_line, end_line, 'Postfix lines with: ', function(line, text)
+        local content, trailing = line:match '^(.-)(%s*)$'
+        return content .. text .. trailing
     end)
 end
 
