@@ -10,8 +10,8 @@ return {
     { '<leader>q', desc = '[Q]uickfix diagnostics' },
 
     { '<leader>x', group = 'Line te[X]t' },
-    { '<leader>xp', desc = '[P]refix lines', mode = { 'n', 'x' } },
-    { '<leader>xs', desc = 'Po[s]tfix lines', mode = { 'n', 'x' } },
+    { '<leader>xpr', desc = '[P]refix lines', mode = { 'n', 'x' } },
+    { '<leader>xpo', desc = 'P[o]stfix lines', mode = { 'n', 'x' } },
 
     { '<leader>s', group = '[S]earch' },
     { '<leader>sh', desc = '[S]earch [H]elp' },
