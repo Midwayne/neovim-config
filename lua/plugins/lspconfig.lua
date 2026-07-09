@@ -140,7 +140,7 @@ return {
 
             -- Diagnostic Config
             -- See :help vim.diagnostic.Opts
-            vim.diagnostic.config {
+            local diagnostic_display = {
                 severity_sort = true,
                 float = { border = 'rounded', source = 'if_many' },
                 underline = { severity = vim.diagnostic.severity.ERROR },
@@ -171,6 +171,30 @@ return {
                     end,
                 },
             }
+
+            vim.diagnostic.config(diagnostic_display)
+
+            vim.g.diagnostics_display_enabled = true
+
+            vim.keymap.set('n', '<leader>td', function()
+                local enabled = not vim.g.diagnostics_display_enabled
+                vim.g.diagnostics_display_enabled = enabled
+
+                if enabled then
+                    vim.diagnostic.config(diagnostic_display)
+                else
+                    vim.diagnostic.config {
+                        virtual_text = false,
+                        signs = false,
+                        underline = false,
+                    }
+                end
+
+                vim.notify(
+                    enabled and 'Diagnostics display enabled' or 'Diagnostics display disabled',
+                    vim.log.levels.INFO
+                )
+            end, { desc = '[T]oggle [D]iagnostics display' })
 
             -- LSP servers and clients are able to communicate to each other what features they support.
             --  By default, Neovim doesn't support everything that is in the LSP specification.

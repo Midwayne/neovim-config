@@ -27,6 +27,7 @@ return {
     { '<leader>t', group = '[T]oggle' },
     { '<leader>tt', desc = '[T]oggle [T]erminal' },
     { '<leader>tm', desc = '[T]oggle [M]arkdown render' },
+    { '<leader>td', desc = '[T]oggle [D]iagnostics display' },
 
     { '<leader>m', group = '[M]arkdown' },
     { '<leader>mp', desc = '[M]arkdown [P]review' },
@@ -71,6 +72,7 @@ return {
     { 'gW', desc = 'LSP: [W]orkspace symbols' },
     { 'grt', desc = 'LSP: [T]ype definition' },
     { '<leader>th', desc = '[T]oggle inlay [H]ints' },
+    { 'gx', desc = 'Open link under cursor' },
     { ']c', desc = 'Next git change' },
     { '[c', desc = 'Previous git change' },
 }
