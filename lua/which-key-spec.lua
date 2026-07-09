@@ -9,6 +9,10 @@ return {
     { '<leader>f', desc = '[F]ormat buffer' },
     { '<leader>q', desc = '[Q]uickfix diagnostics' },
 
+    { '<leader>x', group = 'Line te[X]t' },
+    { '<leader>xp', desc = '[P]refix lines', mode = { 'n', 'x' } },
+    { '<leader>xs', desc = 'Po[s]tfix lines', mode = { 'n', 'x' } },
+
     { '<leader>s', group = '[S]earch' },
     { '<leader>sh', desc = '[S]earch [H]elp' },
     { '<leader>sk', desc = '[S]earch [K]eymaps' },
