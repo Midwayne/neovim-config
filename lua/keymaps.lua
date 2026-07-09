@@ -10,7 +10,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Open URL or markdown/HTML link under cursor in the system browser
 vim.keymap.set('n', 'gx', function()
-  require('link').open_under_cursor()
+    require('link').open_under_cursor()
 end, { desc = 'Open link under cursor' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes

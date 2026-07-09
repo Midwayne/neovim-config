@@ -190,10 +190,7 @@ return {
                     }
                 end
 
-                vim.notify(
-                    enabled and 'Diagnostics display enabled' or 'Diagnostics display disabled',
-                    vim.log.levels.INFO
-                )
+                vim.notify(enabled and 'Diagnostics display enabled' or 'Diagnostics display disabled', vim.log.levels.INFO)
             end, { desc = '[T]oggle [D]iagnostics display' })
 
             -- LSP servers and clients are able to communicate to each other what features they support.
