@@ -64,4 +64,24 @@ function M.postfix_lines(start_line, end_line)
     end)
 end
 
+function M.remove_prefix_lines(start_line, end_line)
+    edit_lines(start_line, end_line, 'Remove prefix: ', function(line, text)
+        local indent, content = line:match '^(%s*)(.*)$'
+        if vim.startswith(content, text) then
+            return indent .. content:sub(#text + 1)
+        end
+        return line
+    end)
+end
+
+function M.remove_postfix_lines(start_line, end_line)
+    edit_lines(start_line, end_line, 'Remove suffix: ', function(line, text)
+        local content, trailing = line:match '^(.-)(%s*)$'
+        if vim.endswith(content, text) then
+            return content:sub(1, #content - #text) .. trailing
+        end
+        return line
+    end)
+end
+
 return M

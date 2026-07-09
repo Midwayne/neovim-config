@@ -49,6 +49,12 @@ end, { desc = '[L]ine [P]refix' })
 vim.keymap.set({ 'n', 'x' }, '<leader>ls', function()
     edit_selected_lines(require('multiline').postfix_lines)
 end, { desc = '[L]ine [S]uffix' })
+vim.keymap.set({ 'n', 'x' }, '<leader>lP', function()
+    edit_selected_lines(require('multiline').remove_prefix_lines)
+end, { desc = '[L]ine remove [P]refix' })
+vim.keymap.set({ 'n', 'x' }, '<leader>lS', function()
+    edit_selected_lines(require('multiline').remove_postfix_lines)
+end, { desc = '[L]ine remove [S]uffix' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
