@@ -27,12 +27,12 @@ local function edit_selected_lines(action)
     action(start_line, end_line)
 end
 
-vim.keymap.set('n', '<leader>xpr', function()
+vim.keymap.set('n', '<leader>lp', function()
     edit_selected_lines(require('multiline').prefix_lines)
-end, { desc = '[P]refix lines' })
-vim.keymap.set('n', '<leader>xpo', function()
+end, { desc = '[L]ine [P]refix' })
+vim.keymap.set('n', '<leader>ls', function()
     edit_selected_lines(require('multiline').postfix_lines)
-end, { desc = 'P[o]stfix lines' })
+end, { desc = '[L]ine [S]uffix' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
