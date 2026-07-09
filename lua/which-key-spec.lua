@@ -9,6 +9,10 @@ return {
     { '<leader>f', desc = '[F]ormat buffer' },
     { '<leader>q', desc = '[Q]uickfix diagnostics' },
 
+    { '<leader>x', group = 'Line te[X]t' },
+    { '<leader>xpr', desc = '[P]refix lines', mode = { 'n', 'x' } },
+    { '<leader>xpo', desc = 'P[o]stfix lines', mode = { 'n', 'x' } },
+
     { '<leader>s', group = '[S]earch' },
     { '<leader>sh', desc = '[S]earch [H]elp' },
     { '<leader>sk', desc = '[S]earch [K]eymaps' },
@@ -27,6 +31,7 @@ return {
     { '<leader>t', group = '[T]oggle' },
     { '<leader>tt', desc = '[T]oggle [T]erminal' },
     { '<leader>tm', desc = '[T]oggle [M]arkdown render' },
+    { '<leader>td', desc = '[T]oggle [D]iagnostics display' },
 
     { '<leader>m', group = '[M]arkdown' },
     { '<leader>mp', desc = '[M]arkdown [P]review' },
@@ -71,6 +76,7 @@ return {
     { 'gW', desc = 'LSP: [W]orkspace symbols' },
     { 'grt', desc = 'LSP: [T]ype definition' },
     { '<leader>th', desc = '[T]oggle inlay [H]ints' },
+    { 'gx', desc = 'Open link under cursor' },
     { ']c', desc = 'Next git change' },
     { '[c', desc = 'Previous git change' },
 }
